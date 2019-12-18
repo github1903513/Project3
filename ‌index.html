@@ -1,0 +1,206 @@
+<!DOCTYPE HTML>
+<html>
+<head>
+<meta charset="utf-8">
+  <title>Todo_list_jQuery</title>
+  <meta name="description" content="">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+
+  <link rel="manifest" href="site.webmanifest">
+  <link rel="apple-touch-icon" href="icon.png">
+  <!-- Place favicon.ico in the root directory -->
+
+  <link rel="stylesheet" href="css/normalize.css">
+  <link rel="stylesheet" href="css/main.css">
+  <link rel="stylesheet" href="css/todo_list.css">
+
+  <meta name="theme-color" content="#fafafa">
+
+</head>
+<body>
+
+ <!-- boilerplate code -->
+  <script src="js/vendor/modernizr-3.7.1.min.js"></script>
+  <script src="https://code.jquery.com/jquery-3.4.1.min.js" integrity="sha256-CSXorXvZcTkaix6Yvo6HppcZGetbYMGWSFlBw8HfCJo=" crossorigin="anonymous"></script>
+  <script>window.jQuery || document.write('<script src="js/vendor/jquery-3.4.1.min.js"><\/script>')</script>
+  <script src="js/plugins.js"></script>
+  <script src="js/main.js"></script>
+
+<!-- Add my application content here start -->
+
+	<h1>Create ToDo List(jQuery version)</h1>
+	<p>Please enter your Todo list items and add them to Todo list table!</p>
+	<div class="container">
+	<table  class="tablestyle" id="inputTable">
+	<!--<form action="" class="form-control add-todo">onfocus="validateAlert()" onblur="hiddenAlert()"-->
+	<tr>
+	<td><div class="col-25"><span >User guide :</div>
+		<div class="col-75"><span class="showBtn" id="showGuide" >/show</span><span class="showBtn" id="hiddenGuide" >hidden</span></div>
+	</td>
+	</tr>
+	<tr>
+	<td>&nbsp;</td>
+	</tr>
+	<tr id="guide" style="display:none">
+	<td>
+	<span><b>1.Validate task is 1-20 characters, include 0-9,a-z.A-Z,_ or  spaces<br></span>
+	<span><b>2.Click the show all checkbox to list all of the task<br></span>
+	<!--<span><b>3.Drag and drop the task to sort the task</span>-->
+	</td>
+	</tr>
+	<tr>
+	<td><div class="col-25">Task :</div>
+	<div class="col-75"><input name="Taskname" type="text" id="Taskname" size="20">
+	</div>
+	</td>
+	</tr>
+	<tr>
+	<td><div class="col-25">Priority :</div>
+	<div class="col-75">
+		<select name="priority" id="priority">
+		<option value="Highest" selected>Highest</option>
+		<option value="Medium">Medium</option>
+		<option value="Lowest">Lowest</option>
+		</select>
+	</div>
+	</td>
+	</tr>
+	<tr>
+	<td>
+	<!--<input type="button" value = "Submit" onclick="return additemtoTable()" >-->
+	<span  class="addBtn" id="addBtn">Add</span>
+	</td>
+	</tr>
+	<!--</form>-->
+
+	</table>
+	</div>
+
+<br>
+<br>
+
+<div id="outputDIV" >
+	<h2>ToDo List:</h2><span style="float:middle;">&nbsp;&nbsp;<input type="checkbox" id="showAll" name="showAll" value="showAll">show all taskname</span>
+	<table style="width:50%" class="showtablestyle" id="outputTable" border="0">
+
+	<tr>
+	<th style="width:20%">Task name
+	<th style="width:10%">Priority
+	<th style="width:5%">Delete
+	</tr>
+
+	</table>
+
+</div>
+<!-- Add my application content here end -->
+<script>
+$(document).ready(
+   function(){
+
+//show the guide
+     $('#showGuide').click(
+            function(){
+                $('#guide').fadeIn("slow");
+            });
+//hidden the guide
+    $('#hiddenGuide').click(
+             function(){
+                $('#guide').fadeOut(2000);
+            });
+
+//input validate check and add new tr
+   $('#addBtn').click(
+    function(){
+      var validinputType = new RegExp("^[0-9a-zA-Z \-'_]{1,20}$"); //(Regular expression)validate type:0-9,a-z.A-Z,_ ja spaces
+      var task = $.trim($('#Taskname').val());//Remove the spaces at the beginning and end of the string
+     if(task.length==0)
+     {
+      alert("The task can't empty,Plase input!"); //alert
+      return false;
+      }
+      else {
+        if (validinputType.test(task)==false) //validatetype? Regular expression
+        {
+          alert("Valid type is 1-20bytes :0-9,a-z.A-Z,_ ja spaces!");
+          $('#Taskname').value= null;
+          $("#Taskname").css("border","2px solid red");
+          $('#Taskname').focus();
+          return false;
+        } //one of the characters is invalidate
+        else//all of the characters are validate
+        {
+          //add the item to Todo_list
+          var test= $.trim($('#Taskname').val());
+          var test1= $("#priority").val();
+          //create tr
+            var $tr=$("<tr></tr>");
+            $tr.attr('draggable', 'true');
+            //$tr.attr('ondragover', 'dragOver(e)');
+            //$tr.attr('ondragstart', 'dragStart(e)');
+            //$tr.attr('ondragend', 'dragEnd(e)');
+            $tr.attr('id', 'dragable');
+            //create td
+            var $td1=$("<td></td>");
+            $td1.html(test);
+            var $td2=$("<td></td>");
+            $td2.html(test1);
+            var $td3=$("<td></td>");
+            $td3.attr('class', 'close');
+            $td3.html("<span>X</span>");
+
+            $tr.append($td1);  $tr.append($td2);  $tr.append($td3);
+            $("#outputTable").append($tr);
+
+            $('#Taskname').val("");
+            $("#Taskname").css("border","1px solid #ccc");
+            $('#Taskname').focus();
+
+          return true;
+        }
+
+          }
+      });
+
+//del todolist items
+setTimeout(function(){
+$('.showtablestyle').on('click','.close', function() {
+    //alert($(this));
+    $(this).parent().hide();
+    //$(this).css("text-decoration","line-through");
+  });
+},1000);
+
+//show all the task list
+$('#showAll').click(
+ function(){
+   $(".close").each(function()
+                 {
+                     $(this).parent().show();
+                 });
+     });
+
+/*drag and drop
+
+$("#dragable").on("dragstart",function(e){
+alert(e);
+       e.originalEvent.dataTransfer.effectAllowed ="";
+       e.originalEvent.dataTransfer.setData("obj_add",e.target);
+       console.log(e.originalEvent.dataTransform)
+   });*/
+
+   }
+);
+
+</script>
+
+
+  <!-- Google Analytics: change UA-XXXXX-Y to be your site's ID. -->
+  <script>
+    window.ga = function () { ga.q.push(arguments) }; ga.q = []; ga.l = +new Date;
+    ga('create', 'UA-XXXXX-Y', 'auto'); ga('set','transport','beacon'); ga('send', 'pageview')
+  </script>
+  <script src="https://www.google-analytics.com/analytics.js" async></script>
+
+
+</body>
+</html>

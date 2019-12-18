@@ -1,0 +1,233 @@
+body{
+    background-color:#EEEEEE;
+}
+.todolist{
+    background-color:#FFF;
+    padding:20px 20px 10px 20px;
+    margin-top:30px;
+}
+.todolist h1{
+    margin:0;
+    padding-bottom:20px;
+    text-align:center;
+}
+.form-control{
+    border-radius:0;
+	width:70%;
+	align:center;
+	
+}
+* {
+  box-sizing: border-box;
+}
+
+label {
+  padding: 12px 12px 12px 0;
+  display: inline-block;
+}
+.tablestyle
+{
+ width:60%;
+ border:0;
+}
+/* ToDo list show table style start*/
+.showtablestyle
+{
+ width:60%;
+ border-collapse: collapse;
+}
+.showtablestyle td,.showtablestyle th
+{
+  border: 1px solid #ddd;
+  padding: 8px;
+}
+
+.showtablestyle th{
+  padding-top: 12px;
+  padding-bottom: 12px;
+  text-align: left;
+  background-color: #4CAF50;
+  color: white;
+}
+
+/* Remove margins and padding from the list */
+.showtablestyle tr{
+  margin: 0;
+  padding: 0;
+}
+
+/* Style the list items */
+.showtablestyle tr{
+  cursor: pointer;
+  position: relative;
+  padding: 12px 8px 12px 40px;
+  background: #eee;
+  font-size: 18px;
+  transition: 0.2s;
+
+  /* make the list items unselectable */
+  -webkit-user-select: none;
+  -moz-user-select: none;
+  -ms-user-select: none;
+  user-select: none;
+}
+
+/* Set all odd list items to a different color (zebra-stripes) */
+.showtablestyle tr:nth-child(odd) {
+  background: #f9f9f9;
+}
+
+/* Darker background-color on hover */
+.showtablestyle tr:hover {
+  background: #ddd;
+}
+
+/* When clicked on, add a background color and strike out text */
+.showtablestyle tr.checked {
+  background: #888;
+  color: #fff;
+  text-decoration: line-through;
+}
+
+/* Add a "checked" mark when clicked on */
+.showtablestyle tr.checked::before {
+  content: '';
+  position: absolute;
+  border-color: #fff;
+  border-style: solid;
+  border-width: 0 2px 2px 0;
+  top: 10px;
+  left: 16px;
+  transform: rotate(45deg);
+  height: 15px;
+  width: 7px;
+}
+
+
+/* Style the close button */
+.close {
+  position: relative;
+  right: 0;
+  top: 0;
+}
+
+.close:hover {
+  background-color: #4CAF50;
+  color: white;
+}
+
+/* ToDo list show table style end*/
+
+
+p.inputAlert {
+	display: none;
+}
+
+input[type=text], select, textarea {
+  width: 100%;
+  padding: 12px;
+  border: 1px solid #ccc;
+  border-radius: 4px;
+  resize: vertical;
+}
+
+.container {
+  border-radius: 5px;
+  background-color: #f2f2f2;
+  padding: 20px;
+  width:50%;
+}
+
+.col-25 {
+  float: left;
+  width: 25%;
+  margin-top: 6px;
+}
+
+.col-75 {
+  float: left;
+  width: 75%;
+  margin-top: 6px;
+}
+.row:after {
+  content: "";
+  display: table;
+  clear: both;
+}
+
+input[type=text], select, textarea {
+  width: 100%;
+  padding: 12px;
+  border: 1px solid #ccc;
+  border-radius: 4px;
+  resize: vertical;
+}
+/*input[type=submit] {
+  background-color: #4CAF50;
+  color: white;
+  padding: 12px 20px;
+  border: none;
+  border-radius: 4px;
+  cursor: pointer;
+  float: right;
+}
+
+input[type=submit]:hover {
+  background-color: #45a049;
+}*/
+
+/* Style the "Add" button */
+.addBtn {
+  background-color: #4CAF50;
+  color: white;
+  padding: 12px 20px;
+  border: none;
+  border-radius: 4px;
+  cursor: pointer;
+  float: right;
+}
+.addBtn:hover {
+  background-color: #45a049;
+}
+
+.showBtn
+{
+  background-color: #4CAF50;
+  color: white;
+  padding: 1px 2px;
+  border: none;
+  border-radius: 1px;
+  cursor: pointer;
+  float: right;
+}
+.showBtn:hover
+{
+  background-color: #45a049;
+}
+
+li.ui-state-default{
+    background:#fff;
+    border:none;
+    border-bottom:1px solid #ddd;
+}
+
+li.ui-state-default:last-child{
+    border-bottom:none;
+}
+
+.todo-footer{
+    background-color:#F4FCE8;
+    margin:0 -20px -10px -20px;
+    padding: 10px 20px;
+}
+#done-items li{
+    padding:10px 0;
+    border-bottom:1px solid #ddd;
+    text-decoration:line-through;
+}
+#done-items li:last-child{
+    border-bottom:none;
+}
+#checkAll{
+    margin-top:10px;
+}
